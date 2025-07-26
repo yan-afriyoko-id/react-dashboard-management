@@ -1,36 +1,301 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Sistem Manajemen Siswa
 
-## Getting Started
+Sistem manajemen data siswa yang dibangun dengan Next.js dan Tailwind CSS, terintegrasi dengan API Laravel backend.
 
-First, run the development server:
+## 🚀 Fitur Utama
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### 1. **Authentication System**
+- ✅ Login/Register user
+- ✅ Email verification
+- ✅ Forgot/Reset password
+- ✅ Token-based authentication
+- ✅ Auto-logout saat token expired
+
+### 2. **Siswa Management**
+- ✅ CRUD operasi siswa
+- ✅ Multiple phone numbers per siswa
+- ✅ Multiple NISN numbers per siswa
+- ✅ Many-to-many relationship dengan hobbies
+- ✅ Validasi data lengkap
+
+### 3. **Hobby Management**
+- ✅ CRUD operasi hobi
+- ✅ Relasi dengan siswa
+- ✅ Statistik penggunaan hobi
+
+### 4. **User Management**
+- ✅ CRUD operasi user (admin)
+- ✅ Search dan pagination
+- ✅ Email verification status
+- ✅ Password management
+
+### 5. **Profile Management**
+- ✅ Update profil user
+- ✅ Change password
+- ✅ Delete account
+- ✅ User statistics
+
+### 6. **Dashboard**
+- ✅ Statistik real-time
+- ✅ Responsive design
+- ✅ Mobile-friendly interface
+
+## 🛠️ Teknologi yang Digunakan
+
+### Frontend
+- **Next.js 14** - React framework
+- **Tailwind CSS** - Utility-first CSS framework
+- **JavaScript ES6+** - Modern JavaScript
+- **Local Storage** - Token management
+
+### Backend API
+- **Laravel** - PHP framework
+- **Laravel Sanctum** - Authentication
+- **MySQL/PostgreSQL** - Database
+- **RESTful API** - API endpoints
+
+## 📁 Struktur Project
+
+```
+src/
+├── app/
+│   ├── globals.css
+│   ├── layout.js
+│   └── page.js
+├── components/
+│   ├── Auth/
+│   │   ├── LoginForm.js
+│   │   └── RegisterForm.js
+│   └── Dashboard/
+│       ├── Dashboard.js
+│       ├── DashboardStats.js
+│       ├── HobbyTable.js
+│       ├── ProfileForm.js
+│       ├── Sidebar.js
+│       ├── SiswaTable.js
+│       └── UserTable.js
+├── config/
+│   └── api.js
+└── services/
+    └── api.js
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Cara Menjalankan
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 1. Install Dependencies
+```bash
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2. Setup Environment
+Pastikan backend Laravel sudah berjalan di `http://localhost:8000`
 
-## Learn More
+### 3. Jalankan Development Server
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 4. Akses Aplikasi
+Buka [http://localhost:3000](http://localhost:3000)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📋 API Endpoints
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Authentication
+- `POST /api/register` - Register user baru
+- `POST /api/login` - Login user
+- `POST /api/logout` - Logout user
+- `GET /api/user` - Get current user
+- `POST /api/forgot-password` - Forgot password
+- `POST /api/reset-password` - Reset password
 
-## Deploy on Vercel
+### Siswa Management
+- `GET /api/siswa` - Get all students
+- `GET /api/siswa/{id}` - Get single student
+- `POST /api/siswa` - Create student
+- `PUT /api/siswa/{id}` - Update student
+- `DELETE /api/siswa/{id}` - Delete student
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Hobby Management
+- `GET /api/hobby` - Get all hobbies
+- `POST /api/hobby` - Create hobby
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### User Management
+- `GET /api/users` - Get all users (paginated)
+- `GET /api/users/{id}` - Get single user
+- `POST /api/users` - Create user
+- `PUT /api/users/{id}` - Update user
+- `DELETE /api/users/{id}` - Delete user
+- `GET /api/users/search` - Search users
+
+### Profile Management
+- `GET /api/profile` - Get current user profile
+- `PUT /api/profile` - Update profile
+- `POST /api/profile/change-password` - Change password
+- `DELETE /api/profile` - Delete account
+- `GET /api/profile/statistics` - Get user statistics
+
+## 🎨 UI/UX Features
+
+### Responsive Design
+- ✅ Mobile-first approach
+- ✅ Tablet dan desktop optimized
+- ✅ Sidebar collapse di mobile
+- ✅ Touch-friendly interface
+
+### Modern UI Components
+- ✅ Clean dan minimal design
+- ✅ Loading states
+- ✅ Error handling
+- ✅ Success notifications
+- ✅ Modal dialogs
+- ✅ Form validation
+
+### User Experience
+- ✅ Intuitive navigation
+- ✅ Fast loading times
+- ✅ Smooth transitions
+- ✅ Consistent styling
+- ✅ Accessibility features
+
+## 🔐 Security Features
+
+### Authentication
+- ✅ JWT token management
+- ✅ Auto-logout saat token expired
+- ✅ Secure password handling
+- ✅ Email verification
+- ✅ Password reset functionality
+
+### Data Protection
+- ✅ Input validation
+- ✅ XSS protection
+- ✅ CSRF protection (via Laravel)
+- ✅ Secure API communication
+
+## 📊 Database Schema
+
+### Siswa Table
+```sql
+- id (primary key)
+- name (string)
+- created_at (timestamp)
+- updated_at (timestamp)
+```
+
+### Phone Table
+```sql
+- id (primary key)
+- number_phone (string)
+- siswa_id (foreign key)
+- created_at (timestamp)
+- updated_at (timestamp)
+```
+
+### Nisns Table
+```sql
+- id (primary key)
+- nisns (string)
+- siswa_id (foreign key)
+- created_at (timestamp)
+- updated_at (timestamp)
+```
+
+### Hobby Table
+```sql
+- id (primary key)
+- name (string)
+- created_at (timestamp)
+- updated_at (timestamp)
+```
+
+### Users Table
+```sql
+- id (primary key)
+- name (string)
+- email (string, unique)
+- password (hashed)
+- email_verified_at (timestamp)
+- created_at (timestamp)
+- updated_at (timestamp)
+```
+
+### Pivot Table: siswa_hobbies
+```sql
+- siswa_id (foreign key)
+- hobby_id (foreign key)
+- created_at (timestamp)
+- updated_at (timestamp)
+```
+
+## 🚀 Deployment
+
+### Frontend (Vercel/Netlify)
+1. Push code ke GitHub
+2. Connect repository ke Vercel/Netlify
+3. Set environment variables
+4. Deploy otomatis
+
+### Backend (Laravel)
+1. Setup server dengan PHP 8.1+
+2. Install Composer dependencies
+3. Setup database
+4. Run migrations
+5. Configure environment variables
+
+## 🔧 Configuration
+
+### API Base URL
+Edit file `src/config/api.js`:
+```javascript
+export const API_BASE_URL = 'http://localhost:8000/api';
+```
+
+### Environment Variables
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8000/api
+```
+
+## 📝 Development Notes
+
+### Code Structure
+- **Components**: Reusable UI components
+- **Services**: API communication layer
+- **Config**: Configuration files
+- **Utils**: Helper functions
+
+### Best Practices
+- ✅ Component-based architecture
+- ✅ Service layer pattern
+- ✅ Error boundary handling
+- ✅ Loading state management
+- ✅ Form validation
+- ✅ Responsive design
+
+### Performance
+- ✅ Lazy loading components
+- ✅ Optimized images
+- ✅ Minimal bundle size
+- ✅ Efficient API calls
+
+## 🤝 Contributing
+
+1. Fork repository
+2. Create feature branch
+3. Commit changes
+4. Push to branch
+5. Create Pull Request
+
+## 📄 License
+
+MIT License - see LICENSE file for details
+
+## 🆘 Support
+
+Untuk bantuan dan pertanyaan:
+- Email: support@example.com
+- Documentation: [Link ke docs]
+- Issues: [GitHub Issues]
+
+---
+
+**Dibuat dengan ❤️ menggunakan Next.js dan Tailwind CSS**
