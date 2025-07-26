@@ -206,7 +206,7 @@ export default function SiswaTable() {
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   required
                 />
               </div>
@@ -217,7 +217,7 @@ export default function SiswaTable() {
                   type="text"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   required
                 />
               </div>
@@ -228,29 +228,41 @@ export default function SiswaTable() {
                   type="text"
                   value={formData.nisns}
                   onChange={(e) => setFormData({ ...formData, nisns: e.target.value })}
-                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   required
                 />
               </div>
               
               <div>
                 <label className="block text-sm font-medium text-gray-700">Hobi</label>
-                <select
-                  multiple
-                  value={formData.hobbies}
-                  onChange={(e) => setFormData({ 
-                    ...formData, 
-                    hobbies: Array.from(e.target.selectedOptions, option => parseInt(option.value))
-                  })}
-                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                >
+                <div className="mt-2 space-y-2 max-h-32 overflow-y-auto border border-gray-300 rounded-md p-3">
                   {hobbies.map((hobby) => (
-                    <option key={hobby.id} value={hobby.id}>
-                      {hobby.name}
-                    </option>
+                    <label key={hobby.id} className="flex items-center space-x-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={formData.hobbies.includes(hobby.id)}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setFormData({
+                              ...formData,
+                              hobbies: [...formData.hobbies, hobby.id]
+                            });
+                          } else {
+                            setFormData({
+                              ...formData,
+                              hobbies: formData.hobbies.filter(id => id !== hobby.id)
+                            });
+                          }
+                        }}
+                        className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                      />
+                      <span className="text-sm text-gray-700">{hobby.name}</span>
+                    </label>
                   ))}
-                </select>
-                <p className="mt-1 text-xs text-gray-500">Tekan Ctrl untuk memilih multiple hobi</p>
+                </div>
+                {hobbies.length === 0 && (
+                  <p className="mt-1 text-xs text-gray-500">Belum ada hobi tersedia</p>
+                )}
               </div>
               
               <div className="flex justify-end space-x-3 pt-4">

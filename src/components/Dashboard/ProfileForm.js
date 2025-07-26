@@ -12,6 +12,8 @@ export default function ProfileForm() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    alamat: '',
+    kota: '',
   });
   const [passwordData, setPasswordData] = useState({
     current_password: '',
@@ -31,6 +33,8 @@ export default function ProfileForm() {
       setFormData({
         name: response.data.name,
         email: response.data.email,
+        alamat: response.data.profile?.alamat || '',
+        kota: response.data.profile?.kota || '',
       });
     } catch (error) {
       setError('Gagal memuat data profil');
@@ -179,7 +183,7 @@ export default function ProfileForm() {
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   required
                 />
               </div>
@@ -190,8 +194,30 @@ export default function ProfileForm() {
                   type="email"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Alamat</label>
+                <textarea
+                  value={formData.alamat}
+                  onChange={(e) => setFormData({ ...formData, alamat: e.target.value })}
+                  rows={3}
+                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  placeholder="Masukkan alamat lengkap Anda"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Kota</label>
+                <input
+                  type="text"
+                  value={formData.kota}
+                  onChange={(e) => setFormData({ ...formData, kota: e.target.value })}
+                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  placeholder="Masukkan kota Anda"
                 />
               </div>
               
@@ -217,7 +243,7 @@ export default function ProfileForm() {
                   type="password"
                   value={passwordData.current_password}
                   onChange={(e) => setPasswordData({ ...passwordData, current_password: e.target.value })}
-                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   required
                 />
               </div>
@@ -228,7 +254,7 @@ export default function ProfileForm() {
                   type="password"
                   value={passwordData.new_password}
                   onChange={(e) => setPasswordData({ ...passwordData, new_password: e.target.value })}
-                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   required
                 />
               </div>
@@ -239,7 +265,7 @@ export default function ProfileForm() {
                   type="password"
                   value={passwordData.new_password_confirmation}
                   onChange={(e) => setPasswordData({ ...passwordData, new_password_confirmation: e.target.value })}
-                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   required
                 />
               </div>

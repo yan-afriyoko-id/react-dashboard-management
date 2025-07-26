@@ -240,6 +240,12 @@ Authorization: Bearer {your_token}
 ## Database Relationships
 
 ### Entity Relationships
+- **User** - Authentication entity
+  - `hasOne` Profile (One user can have one profile)
+
+- **Profile** - User profile information
+  - `belongsTo` User (Each profile belongs to one user)
+
 - **Siswa** (Student) - Main entity
   - `hasMany` Phone (One student can have multiple phone numbers)
   - `hasMany` Nisns (One student can have multiple NISN numbers)
@@ -658,7 +664,15 @@ Authorization: Bearer {your_token}
     "email": "john@example.com",
     "email_verified_at": "2024-01-01T00:00:00.000000Z",
     "created_at": "2024-01-01T00:00:00.000000Z",
-    "updated_at": "2024-01-01T00:00:00.000000Z"
+    "updated_at": "2024-01-01T00:00:00.000000Z",
+    "profile": {
+      "id": 1,
+      "user_id": 1,
+      "alamat": "Jl. Contoh No. 123",
+      "kota": "Jakarta",
+      "created_at": "2024-01-01T00:00:00.000000Z",
+      "updated_at": "2024-01-01T00:00:00.000000Z"
+    }
   }
 }
 ```
@@ -675,13 +689,17 @@ Authorization: Bearer {your_token}
 ```json
 {
   "name": "John Updated",
-  "email": "john.updated@example.com"
+  "email": "john.updated@example.com",
+  "alamat": "Jl. Contoh No. 456",
+  "kota": "Bandung"
 }
 ```
 
 **Validation Rules:**
 - `name`: sometimes, required, string, max 255 characters
 - `email`: sometimes, required, string, email format, max 255 characters, unique (except current user)
+- `alamat`: sometimes, nullable, string, max 500 characters
+- `kota`: sometimes, nullable, string, max 100 characters
 
 **Response:**
 ```json
@@ -694,7 +712,15 @@ Authorization: Bearer {your_token}
     "email": "john.updated@example.com",
     "email_verified_at": null,
     "created_at": "2024-01-01T00:00:00.000000Z",
-    "updated_at": "2024-01-01T00:00:00.000000Z"
+    "updated_at": "2024-01-01T00:00:00.000000Z",
+    "profile": {
+      "id": 1,
+      "user_id": 1,
+      "alamat": "Jl. Contoh No. 456",
+      "kota": "Bandung",
+      "created_at": "2024-01-01T00:00:00.000000Z",
+      "updated_at": "2024-01-01T00:00:00.000000Z"
+    }
   }
 }
 ```
@@ -773,6 +799,8 @@ Authorization: Bearer {your_token}
     "name": "John Doe",
     "email": "john@example.com",
     "email_verified": true,
+    "alamat": "Jl. Contoh No. 123",
+    "kota": "Jakarta",
     "created_at": "2024-01-01T00:00:00.000000Z",
     "updated_at": "2024-01-01T00:00:00.000000Z",
     "total_logins": 0
@@ -1103,7 +1131,9 @@ const response = await fetch('/api/profile', {
   },
   body: JSON.stringify({
     name: 'John Updated',
-    email: 'john.updated@example.com'
+    email: 'john.updated@example.com',
+    alamat: 'Jl. Contoh No. 456',
+    kota: 'Bandung'
   })
 });
 const data = await response.json();
@@ -1294,7 +1324,9 @@ const response = await axios.get('/api/profile', {
 const token = localStorage.getItem('token');
 const response = await axios.put('/api/profile', {
   name: 'John Updated',
-  email: 'john.updated@example.com'
+  email: 'john.updated@example.com',
+  alamat: 'Jl. Contoh No. 456',
+  kota: 'Bandung'
 }, {
   headers: {
     'Authorization': `Bearer ${token}`
@@ -1396,6 +1428,8 @@ const response = await axios.post('/api/siswa', {
 3. **Password Security**: Password changes require current password verification
 4. **Account Deletion**: Account deletion requires password confirmation for security
 5. **Statistics**: User statistics provide basic profile information and can be extended for additional metrics
+6. **Profile Data**: Profile includes alamat (address) and kota (city) fields that are optional
+7. **One-to-One Relationship**: Each user can have one profile, profile is automatically created when first updated
 
 ---
 
